@@ -1,0 +1,15 @@
+.map-cell {
+    border: 1px solid gray;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-cell img {
+}
+
+.map-cell:hover {
+    background-color: #00000020;
+}

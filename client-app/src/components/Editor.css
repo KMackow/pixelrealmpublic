@@ -1,0 +1,15 @@
+.editor {
+    display: flex;
+    flex-direction: row;
+    padding: 2px;
+    justify-content: center;
+}
+
+.editor-main-pane {
+    flex: 1;
+    padding-right: 5px;
+}
+
+.editor-side-pane {
+
+}

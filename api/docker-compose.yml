@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=P@ssw0rd
+      - SA_USER=SA
+    ports:
+      - 14344:1433
+    networks:
+      - pixelrealm
+  scottlogic.pixelrealm.api:
+    image: ${DOCKER_REGISTRY-}scottlogicpixelrealmapi
+    build:
+      context: .
+      dockerfile: ScottLogic.PixelRealm.Api/Dockerfile
+    depends_on:
+      - db
+    networks:
+      - pixelrealm
+networks:
+  pixelrealm:

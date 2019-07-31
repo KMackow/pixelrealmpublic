@@ -1,0 +1,42 @@
+version: 2
+
+jobs:
+  test-client-app:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run:
+          name: Installations
+          command: cd client-app && npm install
+      - run:
+          name: Tests
+          command: cd client-app && npm run-script test
+  test-api:
+    docker:
+      - image: microsoft/dotnet
+    steps:
+      - checkout
+      - run:
+          name: Tests
+          command: dotnet test api/ScottLogic.PixelRealm.Tests/ScottLogic.PixelRealm.Tests.csproj
+
+
+workflows:
+  version: 2
+  validate-pr:
+    jobs:
+      - test-client-app:
+          filters:
+            branches:
+              only:
+                - /feature\/.*/
+                - /bug\/.*/
+                - /task\/.*/
+      - test-api:
+          filters:
+            branches:
+              only:
+                - /feature\/.*/
+                - /bug\/.*/
+                - /task\/.*/
